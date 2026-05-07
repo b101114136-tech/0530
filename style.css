@@ -583,7 +583,7 @@ body {
 /* 櫻桃與莖 */
 /* 【修正】把 translateY 改為 -1px，把櫻桃從奶油裡拔出來一點點 */
 .cherry-pair { display: flex; gap: 4px; position: relative; transform: translateY(-7px); }
-.cherry-pair::before { content: ""; position: absolute; top: -10px; left: 50%; width: 12px; height: 12px; border-left: 2px solid #557c3d; border-top: 2px solid #557c3d; border-radius: 8px 0 0 0; transform: translateX(-50%) rotate(10deg); }
+.cherry-pair::before { content: ""; position: absolute; top: -12px; left: 50%; width: 12px; height: 12px; border-left: 2px solid #557c3d; border-top: 2px solid #557c3d; border-radius: 8px 0 0 0; transform: translateX(-50%) rotate(10deg); }
 .cherry { width: 15px; height: 15px; background: radial-gradient(circle at 30% 30%, #ff6b8a, #c31b40); border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 
 .cake-note { margin: 15px 0 0; font-size: 1.05rem; color: #7f3f56; text-align: center; }
