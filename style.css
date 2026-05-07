@@ -609,4 +609,11 @@ body {
     .book-page[class*="trait-left"] .content-card,
     .book-page[class*="trait-right"] .content-card { grid-column: 1; grid-row: 2; }
     .sticker { font-size: 1rem; }
+    .book-page.cake-page {
+    display: block;}
+    .book-page.cake-page .cake-wrap {
+    transform: scale(0.8);
+    transform-origin: center center;}
+    .book-page.cake-page .cake {
+    margin-top: 10px;}
   }
