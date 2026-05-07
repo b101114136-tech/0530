@@ -379,3 +379,10 @@ openGiftBtn.addEventListener("click", openGift);
 initBook();
 loadTrack(0);
 playMusic();
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    bgAudio.pause();
+  } else {
+    if (hasMusicStarted) {
+      bgAudio.play().catch(err => {
+        console.log("瀏覽器阻擋了自動恢復播放", err);});}}});
