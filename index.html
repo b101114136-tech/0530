@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生日快樂，笨笨豬寶寶</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <section class="gift-screen" id="giftScreen">
+<button class="gift-box" id="openGiftBtn" aria-label="打開禮物">
+        <span class="gift-lid"></span>
+        <span class="gift-body"></span>
+        
+        <span class="ribbon-v-top"></span>
+        <span class="ribbon-v-bottom"></span>
+        <span class="ribbon-h-left"></span>
+        <span class="ribbon-h-right"></span>
+        
+        <span class="gift-bow bow-ear gift-bow-left"></span>
+        <span class="gift-bow bow-ear gift-bow-right"></span>
+        <span class="gift-ribbon-knot"></span>
+        <span class="gift-ribbon-tail gift-ribbon-tail-left"></span>
+        <span class="gift-ribbon-tail gift-ribbon-tail-right"></span>
+        <span class="gift-hint">抽開絲帶打開禮物</span>
+      </button>
+    </section>
+
+    <main class="page is-hidden" id="mainPage">
+      <header class="hero">
+        <h1>Happy Birthday</h1>
+        <p>給我最可愛、最漂亮、最聰明、最喜歡的寶寶</p>
+      </header>
+
+      <section class="book-wrap">
+        <div class="book" id="book"></div>
+
+        <nav class="controls">
+          <button id="prevBtn" aria-label="上一頁">上一頁</button>
+          <span id="pageInfo">0 / 0</span>
+          <button id="nextBtn" aria-label="下一頁">下一頁</button>
+        </nav>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

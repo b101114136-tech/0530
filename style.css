@@ -1,0 +1,545 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background: linear-gradient(135deg, #ffe4ef, #ffeecd);
+  color: #4a2e37;
+}
+
+.gift-screen {
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 30%, #ffe7f0 0%, #ffc9db 52%, #f7b6ce 100%);
+}
+
+.gift-screen.is-opening {
+  animation: fadeOutGift 0.75s ease forwards;
+}
+
+.gift-box {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  display: block;
+}
+
+.gift-lid,
+.gift-body,
+.gift-bow,
+.gift-ribbon-knot,
+.gift-ribbon-tail {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 16px;
+}
+
+.gift-lid {
+  top: 50%;
+  width: min(88vw, 780px);
+  height: min(88vw, 780px);
+  transform: translate(-50%, -50%);
+  background: linear-gradient(145deg, #f16d95 0%, #de4f7e 52%, #cf4672 100%);
+  z-index: 2;
+  transition: transform 0.65s cubic-bezier(0.22, 0.61, 0.35, 1);
+  box-shadow: 0 34px 55px rgba(113, 34, 67, 0.35), 0 12px 15px rgba(0, 0, 0, 0.12);
+}
+
+.gift-body {
+  top: 50%;
+  width: min(84vw, 740px);
+  height: min(84vw, 740px);
+  transform: translate(-50%, -46%);
+  background: linear-gradient(150deg, #dd4c79 0%, #cb3d6b 55%, #bb2f5c 100%);
+  z-index: 1;
+  box-shadow: inset 0 -26px 0 rgba(84, 20, 45, 0.24), 0 20px 30px rgba(88, 20, 44, 0.25);
+}
+
+.gift-lid::before,
+.gift-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.08) 24%, rgba(255, 255, 255, 0) 45%);
+  pointer-events: none;
+}
+
+.gift-lid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(126, 31, 70, 0.2);
+  pointer-events: none;
+}
+
+/* =========================================
+   四段式條紋細繩系統 (長度完美對齊盒子)
+   ========================================= */
+.ribbon-v-top,
+.ribbon-v-bottom,
+.ribbon-h-left,
+.ribbon-h-right,
+.gift-ribbon-tail,
+.gift-ribbon-knot {
+  background: repeating-linear-gradient(45deg, #f6cd66, #f6cd66 4px, #ffe59f 4px, #ffe59f 8px);
+}
+
+.ribbon-v-top,
+.ribbon-v-bottom,
+.ribbon-h-left,
+.ribbon-h-right {
+  position: absolute;
+  z-index: 3;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1), inset 0 2px 4px rgba(255,255,255,0.4);
+}
+
+/* 完美對齊盒子中心的長度 */
+.ribbon-v-top {
+  left: 50%; bottom: 50%;
+  transform: translateX(-50%);
+  width: min(3.5vw, 32px); height: min(44vw, 390px);
+}
+.ribbon-v-bottom {
+  left: 50%; top: 50%;
+  transform: translateX(-50%);
+  width: min(3.5vw, 32px); height: min(44vw, 390px);
+}
+.ribbon-h-left {
+  top: 50%; right: 50%;
+  transform: translateY(-50%);
+  height: min(3.5vw, 32px); width: min(44vw, 390px);
+}
+.ribbon-h-right {
+  top: 50%; left: 50%;
+  transform: translateY(-50%);
+  height: min(3.5vw, 32px); width: min(44vw, 390px);
+}
+
+.gift-bow {
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+}
+
+.bow-ear {
+  width: min(12vw, 110px);
+  height: min(10vw, 92px);
+  background: repeating-linear-gradient(135deg, #f6cd66, #f6cd66 4px, #ffe59f 4px, #ffe59f 8px);
+  border-radius: 50% 50% 40% 40%;
+  box-shadow: 0 8px 15px rgba(100, 10, 30, 0.25), inset 0 4px 8px rgba(255, 255, 255, 0.6), inset 0 -6px 12px rgba(120, 10, 40, 0.3);
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.gift-bow-left {
+  transform: translate(-105%, -58%) rotate(-12deg);
+  transform-origin: right center;
+  clip-path: ellipse(85% 100% at 90% 50%);
+}
+
+.gift-bow-right {
+  transform: translate(5%, -58%) rotate(12deg);
+  transform-origin: left center;
+  clip-path: ellipse(85% 100% at 10% 50%);
+}
+
+.gift-ribbon-knot {
+  top: 50%; left: 50%;
+  width: min(5vw, 45px); height: min(4vw, 35px);
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  border-radius: 50%;
+  box-shadow: 0 6px 12px rgba(100, 60, 10, 0.3), inset 0 3px 6px rgba(255, 255, 255, 0.5);
+  border: 1px solid #d4a048;
+}
+
+.gift-ribbon-tail {
+  width: min(3.5vw, 32px); height: min(25vw, 220px);
+  z-index: 3;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 88%, 0 100%);
+  transition: transform 0.7s ease, opacity 0.7s ease;
+  box-shadow: inset 0 -4px 8px rgba(120, 10, 40, 0.2);
+}
+
+.gift-body::after {
+  content: "";
+  position: absolute;
+  inset: 8% 8% 12%;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 30%, rgba(120, 35, 70, 0.35), rgba(50, 10, 30, 0.72));
+  opacity: 0;
+  transform: translateY(8px) scaleY(0.92);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.gift-ribbon-tail-left { top: 50%; transform: translate(-150%, 5%) rotate(8deg); transform-origin: top center; }
+.gift-ribbon-tail-right { top: 50%; transform: translate(50%, 5%) rotate(-8deg); transform-origin: top center; }
+
+/* =========================================
+   絲帶解開向四邊彈開與結頭消失動畫
+   ========================================= */
+.gift-box.is-tension .gift-bow-left { transform: translate(-108%, -60%) rotate(-14deg) scale(0.95); }
+.gift-box.is-tension .gift-bow-right { transform: translate(8%, -60%) rotate(14deg) scale(0.95); }
+
+/* 垂直絲帶向上下抽離 */
+.gift-box.is-pulling .ribbon-v-top { animation: pullUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.gift-box.is-pulling .ribbon-v-bottom { animation: pullDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+/* 水平絲帶向左右抽離 */
+.gift-box.is-pulling .ribbon-h-left { animation: pullLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+.gift-box.is-pulling .ribbon-h-right { animation: pullRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+/* 繩結、耳朵、尾巴：瞬間模糊並消失 (模擬解開) */
+.gift-box.is-pulling .gift-ribbon-knot,
+.gift-box.is-pulling .bow-ear,
+.gift-box.is-pulling .gift-ribbon-tail { 
+  animation: dissolveKnot 0.4s ease forwards; 
+}
+
+@keyframes pullUp { 
+  100% { transform: translate(-50%, -100%); opacity: 0; } 
+}
+@keyframes pullDown { 
+  100% { transform: translate(-50%, 100%); opacity: 0; } 
+}
+@keyframes pullLeft { 
+  100% { transform: translate(-100%, -50%); opacity: 0; } 
+}
+@keyframes pullRight { 
+  100% { transform: translate(100%, -50%); opacity: 0; } 
+}
+@keyframes dissolveKnot {
+  0% { opacity: 1; filter: blur(0); }
+  100% { opacity: 0; filter: blur(4px); }
+}
+
+.gift-body::after {
+  content: "";
+  position: absolute;
+  inset: 8% 8% 12%;
+  border-radius: 12px;
+  background: radial-gradient(circle at 50% 30%, rgba(120, 35, 70, 0.35), rgba(50, 10, 30, 0.72));
+  opacity: 0;
+  transform: translateY(8px) scaleY(0.92);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.gift-box.opened .gift-lid {
+  transform: translate(-50%, -75%) scale(0.92) rotate(-6deg);
+  transition-delay: 0s;
+}
+
+.gift-box.opened .gift-body::after {
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+}
+
+.gift-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 10vh;
+  transform: translateX(-50%);
+  margin: 0;
+  color: #7f3f56;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  z-index: 6;
+}
+
+/* =========================================
+   相冊分頁佈局 (你最喜歡的翻頁效果保留！)
+   ========================================= */
+.page { width: min(960px, 92vw); margin: 2.5rem auto; }
+.page.is-hidden { display: none; }
+.page.is-visible { animation: fadeInMain 0.7s ease; }
+
+.hero { text-align: center; margin-bottom: 1.5rem; }
+.hero h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); color: #c33764; }
+.hero p { margin: 0.6rem 0 0; font-size: 1.05rem; }
+
+.book-wrap {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  padding: 1.2rem;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 14px 36px rgba(120, 56, 80, 0.18);
+}
+
+.book {
+  position: relative;
+  height: min(68vh, 620px);
+  min-height: 520px;
+  perspective: 2000px;
+  overflow: hidden;
+}
+
+.book-page {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(12, minmax(0, 1fr));
+  gap: 0.45rem;
+  padding: 0.45rem;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #f3d8de;
+  overflow: hidden;
+  transform-origin: left center;
+  transform: rotateY(-180deg); 
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.8s ease;
+  backface-visibility: hidden; 
+  z-index: 1;
+}
+
+.book-page.is-active {
+  transform: rotateY(0);
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 5;
+}
+
+.book-page.is-active ~ .book-page {
+  transform: rotateY(0);
+  opacity: 0;
+  z-index: 1;
+}
+
+.page-decor { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+.sticker { position: absolute; font-size: clamp(1.1rem, 2vw, 1.6rem); opacity: 0.88; }
+
+.photo-zone {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(104, 50, 72, 0.18);
+  background: transparent;
+  border: 1px solid rgba(255, 169, 197, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.photo-zone img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: var(--photo-fit, contain);
+  object-position: center;
+}
+
+.content { padding: 1.25rem 1.1rem; display: flex; flex-direction: column; justify-content: center; }
+
+.content-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.87);
+  border-radius: 12px;
+  box-shadow: 0 8px 18px rgba(131, 59, 87, 0.12);
+  overflow: auto;
+  border: 1px solid rgba(255, 187, 209, 0.45);
+  z-index: 3;
+}
+
+.book-page.landscape-left .photo-zone { grid-column: 1 / 8; grid-row: 1 / 13; }
+.book-page.landscape-left .content-card { grid-column: 8 / 13; grid-row: 2 / 12; }
+.book-page.landscape-right .photo-zone { grid-column: 6 / 13; grid-row: 1 / 13; }
+.book-page.landscape-right .content-card { grid-column: 1 / 6; grid-row: 2 / 12; }
+.book-page.portrait-left .photo-zone { grid-column: 1 / 6; grid-row: 1 / 13; }
+.book-page.portrait-left .content-card { grid-column: 6 / 13; grid-row: 2 / 12; }
+.book-page.portrait-right .photo-zone { grid-column: 8 / 13; grid-row: 1 / 13; }
+.book-page.portrait-right .content-card { grid-column: 1 / 8; grid-row: 2 / 12; }
+
+.content h2 { margin: 0 0 0.8rem; color: #c33764; }
+.content p { margin: 0; line-height: 1.8; }
+
+.controls { margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.9rem; }
+.controls button {
+  border: none; background: #ff5d8f; color: #fff; font-size: 0.95rem; border-radius: 999px;
+  padding: 0.6rem 1.1rem; cursor: pointer; transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.controls button:hover:not(:disabled) { transform: translateY(-1px); }
+.controls button:disabled { opacity: 0.45; cursor: not-allowed; }
+#pageInfo { min-width: 4rem; text-align: center; font-weight: 700; color: #7f3f56; }
+
+
+/* =========================================
+   蛋糕與裝飾系統 (終極修正版：火苗就位 + 超質感草莓 + 10組水果)
+   ========================================= */
+   .cake-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; }
+   .cake-page { display: block; height: 100%; }
+   
+   .cake {
+     position: relative;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     margin-top: 35px;
+     width: 80%;
+   }
+   
+   /* --- 擬真數字蠟燭系統 (Z=10，被頂層奶油微微包覆底部) --- */
+   .cake-candles { display: flex; justify-content: center; gap: 25px; margin-bottom: -10px; z-index: 10; }
+   .cake-candle { display: flex; flex-direction: column; align-items: center; position: relative; }
+   .candle-num { font-size: 3.8rem; font-weight: 900; font-family: "Arial Rounded MT Bold", "Nunito", sans-serif; color: #ff7597; text-shadow: 0 -2px 3px rgba(255, 255, 255, 0.9), -1px 1px 0 #e64571, -2px 2px 0 #d13a63, -3px 3px 0 #bc3055, -4px 4px 6px rgba(120, 35, 70, 0.4); line-height: 1; margin: 0; z-index: 3; }
+   .num-1 { transform: translateX(-4px); }
+   .wick { width: 2px; height: 8px; background: #333; margin-bottom: -2px; border-radius: 2px; z-index: 2; }
+   .cake-candle::after { content: ""; width: 4px; height: 25px; background: linear-gradient(to right, #c29340, #f6cd66, #c29340); border-radius: 0 0 2px 2px; margin-top: -5px; z-index: 1; }
+   
+   /* 火苗：將 top 改為 -15px，讓火苗接回蠟燭芯上 */
+   .flame {
+     width: 14px;
+     height: 24px;
+     background: radial-gradient(ellipse at bottom, #fff 10%, #ffcc00 40%, #ff6d00 100%);
+     border-radius: 50% 50% 20% 20%;
+     box-shadow: 0 0 12px #ff9900, 0 -4px 16px rgba(255, 85, 0, 0.5);
+     position: absolute;
+     top: -15px; /* 修復火苗浮空問題 */
+     left: 50%;
+     transform: translateX(-50%);
+     animation: flicker 0.8s infinite alternate;
+     z-index: 4;
+   }
+   
+   @keyframes flicker { 0% { transform: translateX(-50%) scale(0.95); opacity: 0.9; } 100% { transform: translateX(-50%) scale(1.05) rotate(-2deg); opacity: 1; box-shadow: 0 0 18px #ffcc00, 0 -6px 20px rgba(255, 85, 0, 0.7); } }
+   
+   /* --- 蛋糕層主體 (重點：Z-index 底部最大，呈現完美立體交疊) --- */
+   .cake-layer { position: relative; margin: 0 auto; overflow: visible; }
+   
+   .layer-top { z-index: 20; height: 85px; width: 60%; background: #ffd4e5; border-radius: 12px 12px 0 0; background-image: radial-gradient(circle at 25% 65%, #fff 4px, transparent 4.5px), radial-gradient(circle at 75% 55%, #ff477e 4px, transparent 4.5px); }
+   .layer-mid { z-index: 40; height: 95px; width: 80%; background: #ffb8d2; border-radius: 12px 12px 0 0; margin-top: -15px; background-image: radial-gradient(circle at 15% 55%, #fff 4px, transparent 4.5px), radial-gradient(circle at 85% 65%, #f6cd66 4px, transparent 4.5px), radial-gradient(circle at 50% 75%, #ff477e 4px, transparent 4.5px); }
+   .layer-bottom { z-index: 60; height: 110px; width: 100%; background: #ff92bd; border-radius: 12px 12px 15px 15px; margin-top: -15px; background-image: radial-gradient(circle at 12% 50%, #fff 4px, transparent 4.5px), radial-gradient(circle at 35% 75%, #f6cd66 4px, transparent 4.5px), radial-gradient(circle at 70% 65%, #fff 4px, transparent 4.5px), radial-gradient(circle at 88% 50%, #ff477e 4px, transparent 4.5px); }
+   
+   /* 奶油拉花 */
+   .cake-layer::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 22px; background: #fff; border-radius: 12px 12px 0 0; z-index: 2; }
+   .cake-layer::after { content: ""; position: absolute; top: 15px; left: 0; width: 100%; height: 16px; background: radial-gradient(circle at 12px 0, #fff 12px, transparent 12.5px); background-size: 24px 16px; background-repeat: repeat-x; z-index: 2; filter: drop-shadow(0 4px 3px rgba(180, 40, 80, 0.25)); }
+   
+  /* --- 水果夾層 --- */
+.fruit-shelf {
+  position: absolute;
+  bottom: 12px;
+  left: -5%; 
+  width: 110%; 
+  display: flex; justify-content: space-evenly; align-items: flex-end;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* --- 【終極升級版：質感草莓】 --- */
+.strawberry-unit {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 給草莓一個明顯的傾斜角度，並微調高度 */
+  transform: rotate(12deg) translateY(1px); 
+}
+/* 讓左右兩側的草莓有不同的傾斜方向，向內倒看起來更生動！ */
+.fruit-shelf > .strawberry-unit:first-child { transform: rotate(-15deg) translateY(2px); }
+.fruit-shelf > .strawberry-unit:last-child { transform: rotate(18deg) translateY(2px); }
+
+.strawberry {
+  width: 22px;
+  height: 28px;
+  /* 複雜漸層：模擬從粉紅到底部鮮紅的質感 */
+  background: radial-gradient(circle at 30% 30%, #ff8da1 5%, #ff527c 30%, #d83d6e 70%, #a62a50 100%);
+  /* 心形體感：更真實的草莓外形 */
+  border-radius: 50% 50% 15% 15% / 60% 60% 40% 40%;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(120, 35, 70, 0.3);
+  overflow: visible; 
+}
+
+/* 草莓種子 (糖珠) */
+.strawberry::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 35%, rgba(255, 255, 255, 0.7) 1.5px, transparent 2px),
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.6) 1.5px, transparent 2px),
+    radial-gradient(circle at 80% 35%, rgba(255, 255, 255, 0.7) 1.5px, transparent 2px),
+    radial-gradient(circle at 35% 55%, rgba(255, 255, 255, 0.6) 1.5px, transparent 2px),
+    radial-gradient(circle at 65% 55%, rgba(255, 255, 255, 0.7) 1.5px, transparent 2px),
+    radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0.6) 1.5px, transparent 2px),
+    radial-gradient(circle at 25% 75%, rgba(255, 255, 255, 0.7) 1.5px, transparent 2px),
+    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.6) 1.5px, transparent 2px);
+  z-index: 2;
+}
+
+/* 草莓立體花萼 */
+.strawberry-unit::before {
+  content: "";
+  position: absolute;
+  top: -8px; 
+  left: 50%;
+  width: 20px;
+  height: 12px;
+  clip-path: polygon(0 100%, 20% 0, 40% 70%, 60% 0, 80% 70%, 100% 0, 100% 100%);
+  background: linear-gradient(135deg, #7cad5e 0%, #557c3d 100%);
+  transform: translateX(-50%) rotate(5deg);
+  z-index: 1; 
+  filter: drop-shadow(0 2px 2px rgba(180, 40, 80, 0.2));
+}
+
+/* 葡萄串與莖 */
+/* 【修正】將葡萄容器高度縮小，去除底部空隙，葡萄就會乖乖落地 */
+.grape-cluster { position: relative; width: 22px; height: 22px; } 
+.grape-cluster::before { content: ""; position: absolute; top: -6px; left: 50%; width: 8px; height: 8px; border-left: 1.5px solid #557c3d; border-top: 1.5px solid #557c3d; border-radius: 6px 0 0 0; transform: translateX(-50%) rotate(-15deg); }
+.grape { position: absolute; width: 13px; height: 13px; background: radial-gradient(circle at 30% 30%, #a6a1e3, #685cc0); border-radius: 50%; box-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+.grape:nth-child(1) { top: 0; left: 5px; z-index: 3;}
+.grape:nth-child(2) { top: 8px; left: 0; z-index: 2;}
+.grape:nth-child(3) { top: 8px; left: 10px; z-index: 2;}
+
+/* 【修正】同樣把大串葡萄的底部空隙拿掉 */
+.grape-4 { width: 24px; height: 30px; } 
+.grape-4 .grape:nth-child(4) { top: 16px; left: 5px; z-index: 1;}
+
+/* 櫻桃與莖 */
+/* 【修正】把 translateY 改為 -1px，把櫻桃從奶油裡拔出來一點點 */
+.cherry-pair { display: flex; gap: 4px; position: relative; transform: translateY(-1px); }
+.cherry-pair::before { content: ""; position: absolute; top: -10px; left: 50%; width: 12px; height: 12px; border-left: 2px solid #557c3d; border-top: 2px solid #557c3d; border-radius: 8px 0 0 0; transform: translateX(-50%) rotate(10deg); }
+.cherry { width: 15px; height: 15px; background: radial-gradient(circle at 30% 30%, #ff6b8a, #c31b40); border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
+
+.cake-note { margin: 15px 0 0; font-size: 1.05rem; color: #7f3f56; text-align: center; }
+
+  @keyframes fadeOutGift { to { opacity: 0; transform: scale(0.98); } }
+  @keyframes fadeInMain { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  
+  @media (max-width: 760px) {
+    .gift-lid { width: min(92vw, 550px); height: min(92vw, 550px); }
+    .gift-body { width: min(88vw, 520px); height: min(88vw, 520px); }
+    .book { height: 580px; min-height: 580px; }
+    .book-page { display: grid; grid-template-columns: 1fr; grid-template-rows: 48% 1fr; padding: 0.6rem; gap: 0.4rem; }
+    .photo-zone { grid-column: 1; grid-row: 1; min-height: 220px; border-radius: 10px 10px 0 0; }
+    .photo-zone img { border-radius: 10px 10px 0 0; }
+    .content-card { grid-column: 1; grid-row: 2; border-radius: 0 0 10px 10px; overflow: visible; }
+    .content { padding: 1rem; }
+    .book-page[class*="scape-left"] .photo-zone,
+    .book-page[class*="scape-right"] .photo-zone { grid-column: 1; grid-row: 1; }
+    .book-page[class*="trait-left"] .photo-zone,
+    .book-page[class*="trait-right"] .photo-zone { grid-column: 1; grid-row: 1; }
+    .book-page[class*="scape-left"] .content-card,
+    .book-page[class*="scape-right"] .content-card { grid-column: 1; grid-row: 2; }
+    .book-page[class*="trait-left"] .content-card,
+    .book-page[class*="trait-right"] .content-card { grid-column: 1; grid-row: 2; }
+    .sticker { font-size: 1rem; }
+  }
