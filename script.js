@@ -379,10 +379,26 @@ openGiftBtn.addEventListener("click", openGift);
 initBook();
 loadTrack(0);
 playMusic();
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
+
+const pauseMusic = () => {
+  if (bgAudio && !bgAudio.paused) {
     bgAudio.pause();
+  }
+};
+const resumeMusic = () => {
+  if (hasMusicStarted && bgAudio && bgAudio.paused) {
+    bgAudio.play().catch(err => {
+      console.log("瀏覽器阻擋了自動恢復播放", err);
+    });
+  }
+};
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden || document.visibilityState === 'hidden') {
+    pauseMusic();
   } else {
-    if (hasMusicStarted) {
-      bgAudio.play().catch(err => {
-        console.log("瀏覽器阻擋了自動恢復播放", err);});}}});
+    resumeMusic();
+  }
+});
+window.addEventListener("pagehide", pauseMusic);
+window.addEventListener("blur", pauseMusic);
+window.addEventListener("focus", resumeMusic);
