@@ -373,6 +373,7 @@ body {
   opacity: 1;
   pointer-events: auto;
   z-index: 5;
+  position: relative;
 }
 
 .book-page.is-active ~ .book-page {
@@ -587,10 +588,10 @@ body {
 .cherry { width: 15px; height: 15px; background: radial-gradient(circle at 30% 30%, #ff6b8a, #c31b40); border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.2); }
 
 .book-page.cake-page {
-  height: 100% !important;     /* 讓它乖乖待在 520px 的框裡 */
+  height: auto !important;     /* 讓它乖乖待在 520px 的框裡 */
   display: flex !important;    /* 改用 flex 排版 */
   flex-direction: column;
-  padding-bottom: 10px;        
+  padding-bottom: 20px;        
   overflow: hidden !important; 
 }
 
@@ -598,26 +599,13 @@ body {
   white-space: pre-wrap !important;
   line-height: 1.6;
   margin-top: 20px;
-  padding: 0 20px 10px 20px;
+  padding: 0 20px 40px 20px;
   font-size: 1.05rem; 
   color: #7f3f56; 
   text-align: center;
-  display: block;
-  flex: 1;            
-  max-height: 220px;  
-  overflow-y: auto;   
+  display: block;  
 }
 
-.cake-note::-webkit-scrollbar {
-  width: 5px;
-}
-.cake-note::-webkit-scrollbar-track {
-  background: transparent;
-}
-.cake-note::-webkit-scrollbar-thumb {
-  background: #ffb8d2;
-  border-radius: 10px;
-}
 
   @keyframes fadeOutGift { to { opacity: 0; transform: scale(0.98); } }
   @keyframes fadeInMain { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
