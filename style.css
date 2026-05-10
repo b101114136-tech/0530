@@ -444,7 +444,7 @@ body {
    蛋糕與裝飾系統 (終極修正版：火苗就位 + 超質感草莓 + 10組水果)
    ========================================= */
    .cake-wrap { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; width: 100%; }
-   .cake-page { display: block; height: 100%; }
+   .cake-page { display: block; height: 150%; }
    
    .cake {
      position: relative;
