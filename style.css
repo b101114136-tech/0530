@@ -248,7 +248,7 @@ body {
 /* 上方的繩子*/
 .gift-box.is-pulling .ribbon-v-top,
 .gift-box.opened .ribbon-v-top {
-  transform: translate(-50%, -70vh) scaleY(1.5);
+  transform: translate(-50%, 90vh) scaleY(0.7);
   opacity: 0;
 }
 
