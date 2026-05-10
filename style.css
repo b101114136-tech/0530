@@ -373,7 +373,10 @@ body {
   opacity: 1;
   pointer-events: auto;
   z-index: 5;
-  position: relative;
+}
+
+.book-page.cake-page.is-active {
+  position: relative !important;
 }
 
 .book-page.is-active ~ .book-page {
@@ -592,7 +595,7 @@ body {
   display: flex !important;    /* 改用 flex 排版 */
   flex-direction: column;
   padding-bottom: 20px;        
-  overflow: hidden !important; 
+  overflow: visible !important; 
 }
 
 .cake-note {
