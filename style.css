@@ -337,10 +337,10 @@ body {
 
 .book {
   position: relative;
-  height: min(68vh, 620px);
+  height:auto;
   min-height: 520px;
   perspective: 2000px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .book-page {
@@ -354,7 +354,7 @@ body {
   background: #fff;
   border-radius: 12px;
   border: 1px solid #f3d8de;
-  overflow: hidden;
+  overflow: visible;
   transform-origin: left center;
   transform: rotateY(-180deg); 
   opacity: 0;
