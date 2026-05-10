@@ -428,7 +428,7 @@ body {
 .book-page.portrait-right .content-card { grid-column: 1 / 8; grid-row: 2 / 12; }
 
 .content h2 { margin: 0 0 0.8rem; color: #c33764; }
-.content p { margin: 0; line-height: 1.8; }
+.content p { margin: 0; line-height: 1.8; white-space: pre-wrap;}
 
 .controls { margin-top: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.9rem; }
 .controls button {
